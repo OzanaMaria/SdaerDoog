@@ -6,6 +6,7 @@ import SignUp from "./Auth/SignUp.js";
 import { AuthProvider } from "./contexts/AuthContexts";
 import Home from "./Home/Home";
 import FirstLoginForm from "./Dashboard/FirstForm";
+import Dashboard from "./Dashboard/Dashboard";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/registerForm" element={<FirstLoginForm />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
       </AuthProvider>
     </Router>

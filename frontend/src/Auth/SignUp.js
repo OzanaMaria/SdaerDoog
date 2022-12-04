@@ -42,7 +42,7 @@ export default function SignUp() {
 
     return (
         <Container>
-            <Row className='row'>
+            <Row className='first-display-card'>
                 <Col className='green'>
                     <h2 className='text-center mb-4'>New account</h2>
                     {error && <Alert variant='danger'>{error}</Alert>}

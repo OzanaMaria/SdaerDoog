@@ -2,11 +2,13 @@
     --light-brown: #edc591;
     --green: #415e54;
     --white: #fff;
+    --black: #111;
+
 }
 
 * {
     font-family: 'Poppins', sans-serif;
-    color: var(--white)
+
 }
 
 .green {
@@ -14,8 +16,9 @@
 
 }
 
-.row {
+.first-display-card {
     background-color: var(--green);
+    color: var(--white)
 }
 
 .background-img {
@@ -64,4 +67,8 @@
 
     color: var(--white) !important;
 
+}
+
+.select-options {
+    color: var(--black) !important;
 }

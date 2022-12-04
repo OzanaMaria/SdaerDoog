@@ -14,7 +14,7 @@ export default function Home() {
         <>
 
             <Container>
-                <Row className='row'>
+                <Row className='first-display-card'>
                     <Col className='green'>
                         <Row className='item title'>SdaerDoog</Row>
                         <Row className='item desc'>You can never get a cup of tea large enough or a book long enough to suit me.</Row>

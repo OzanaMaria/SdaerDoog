@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import { useAuth } from "../contexts/AuthContexts";
 import backgroundImg from "./../Assets/Images/image.jpg";
+import "./SignUp.css";
 
 export default function Login() {
     const emailRef = useRef();
@@ -34,7 +35,7 @@ export default function Login() {
     }
     return (
         <Container>
-            <Row className='row'>
+            <Row className='first-display-card'>
                 <Col className='green'>
                     <h2 className='text-center mb-4'>Login</h2>
                     {error && <Alert variant='danger'>{error}</Alert>}
