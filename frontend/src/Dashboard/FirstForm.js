@@ -1,8 +1,8 @@
 
 
 import Container from 'react-bootstrap/Container';
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,18 +11,70 @@ import Select from 'react-select';
 import backgroundImg from "./../Assets/Images/image.jpg";
 import "../Auth/SignUp.css";
 export default function Login() {
-    const emailRef = useRef();
+    const [books, setBooks] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:3000/dashboard')
+            .then((res) => res.json())
+            .then((result) => {
+                setBooks(result);
+            });
+    }, []);
     const [error, setError] = useState("");
-    const options = [
-        { value: 'Gabriel Garcia Marquez', label: 'Gabriel Garcia Marquez' },
-        { value: 'Stephen King', label: 'Stephen King' },
-        { value: 'Feodor Dostoievski', label: 'Feodor Dostoievski' }
-    ]
+    const authors = books.map(function (book) {
+        return { value: book.author, label: book.author }
+    });
+
+    const booksRecommend = books.map(function (book) {
+        return { value: book.title, label: book.title }
+    });
+
+    const booksRead = books.map(function (book) {
+        return { value: book.title, label: book.title }
+    });
+    const genre = books.map(function (book) {
+        return book.genre
+    });
+    const removeDuplicatesGenre = [...new Set(genre)];
+    const removeDuplicatesAuthors = [...new Set(authors)];
     const navigate = useNavigate();
+    const [input, setInput] = useState({
+        author: '',
+        genre: '',
+        booksRecommend: '',
+        booksRead: '',
+    })
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+
+        setInput(prevInput => {
+            return {
+                ...prevInput,
+                [name]: value,
+            }
+        })
+    }
+    function onDataChange(value, action) {
+        setInput(prevInput => {
+            return {
+                ...prevInput,
+                [action.name]: value,
+            }
+        })
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        navigate("/dashboard")
+        const newInput = {
+            author: input.author,
+            genre: input.genre,
+            booksRecommend: input.booksRecommend,
+            booksRead: input.booksRead,
+        }
+        console.log(newInput)
+        navigate(
+            "/dashboard", { state: newInput }
+        )
     }
     return (
         <Container>
@@ -35,23 +87,23 @@ export default function Login() {
                         <Form.Group id='credentials'>
 
                             <Form.Label className='mt-2'>Favorite author</Form.Label>
-                            <Select className="select-options" isMulti options={options} />
 
+                            <Select className="select-options" isMulti options={removeDuplicatesAuthors} onChange={onDataChange} name="author" />
 
+                            <Form.Label>Genre</Form.Label>
+                            <Form.Select required onChange={handleChange} name="genre" >
+                                {
+                                    removeDuplicatesGenre.map(chosenGenre =>
+                                        <option value={chosenGenre}>{chosenGenre}</option>
+                                    )
+                                }
 
-                            <Form.Label className='mt-2'>Favorite genre</Form.Label>
-                            <Form.Select>
-                                <option >Select option</option>
-                                <option>Romance</option>
-                                <option >Fiction</option>
-                                <option>Adventure</option>
                             </Form.Select>
-
                             <Form.Label className='mt-2'>Three books you would recommend</Form.Label>
-                            <Select className="select-options" isMulti options={options} />
+                            <Select className="select-options" isMulti options={booksRecommend} onChange={onDataChange} name="booksRecommend" />
 
                             <Form.Label className='mt-2'>Three books you read</Form.Label>
-                            <Select className="select-options" isMulti options={options} />
+                            <Select className="select-options" isMulti options={booksRead} onChange={onDataChange} name="booksRead" />
 
                         </Form.Group>
 
@@ -66,6 +118,6 @@ export default function Login() {
                 <Col className='img-container'><Image className="background-img" src={backgroundImg} /></Col>
             </Row>
 
-        </Container>
+        </Container >
     );
 }

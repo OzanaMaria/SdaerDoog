@@ -7,6 +7,7 @@ import { AuthProvider } from "./contexts/AuthContexts";
 import Home from "./Home/Home";
 import FirstLoginForm from "./Dashboard/FirstForm";
 import Dashboard from "./Dashboard/Dashboard";
+import ListingPage from "./Dashboard/ListingPage";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/registerForm" element={<FirstLoginForm />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/listingPage/:id" element={<ListingPage />} />
         </Routes>
       </AuthProvider>
     </Router>

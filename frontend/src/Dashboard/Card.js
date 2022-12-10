@@ -12,10 +12,10 @@ function BasicExample(props) {
             </div>
             <Card.Body>
                 <Card.Title>{props.title}</Card.Title>
-                <Card.Text>{props.description}</Card.Text>
+                <Card.Text>{props.publishingHouse}</Card.Text>
 
                 <Col >
-                    <Link to={{ pathname: `/listingpage/${props.listingId}` }}>
+                    <Link to={{ pathname: `/listingPage/${props.listingId}` }}>
                         <Button variant="primary">Details</Button>
                     </Link>
                 </Col>

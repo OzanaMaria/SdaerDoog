@@ -1,0 +1,36 @@
+{
+    "dashboard": [
+        {
+            "id": 1,
+            "title": "Animal Farm",
+            "publishingHouse": "Penguin Books",
+            "author": "George Orwell",
+            "photo": "http://images.amazon.com/images/P/0451526341.01.LZZZZZZZ.jpg",
+            "genre": "Alegorie"
+        },
+        {
+            "id": 2,
+            "title": "Secret History",
+            "publishingHouse": "Ballantine Books",
+            "author": "DONNA TARTT",
+            "photo": "http://images.amazon.com/images/P/0804111359.01.LZZZZZZZ.jpg",
+            "genre": "Psihologic"
+        },
+        {
+            "id": 3,
+            "title": "Thief of Time",
+            "publishingHouse": "HarperCollins Publishers",
+            "author": "Terry Pratchett",
+            "photo": "http://images.amazon.com/images/P/0060199563.01.LZZZZZZZ.jpg",
+            "genre": "Psihologic"
+        },
+        {
+            "id": 4,
+            "title": "1984",
+            "publishingHouse": "HarperCollins Publishers",
+            "author": "George Orwell",
+            "photo": "http://images.amazon.com/images/P/0060199563.01.LZZZZZZZ.jpg",
+            "genre": "Fiction"
+        }
+    ]
+}
