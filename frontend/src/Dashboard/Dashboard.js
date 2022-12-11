@@ -8,7 +8,7 @@ function Dashboard() {
     const location = useLocation();
     const [books, setBooks] = useState([]);
 
-    // console.log(location.state.genre);
+    console.log(location.state.genre);
     useEffect(() => {
         fetch('http://localhost:3000/dashboard')
             .then((res) => res.json())
@@ -42,7 +42,7 @@ function Dashboard() {
     const displayCard = () => {
         {
 
-            return removeUndefined != undefined && removeUndefined.map((item, index) => (
+            return removeUndefined !== undefined && removeUndefined.map((item, index) => (
                 <ListCard
                     key={index}
                     title={item.title}
