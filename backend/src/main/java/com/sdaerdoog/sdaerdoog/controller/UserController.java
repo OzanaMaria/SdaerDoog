@@ -29,4 +29,6 @@ public class UserController {
         log.info("Received form with payload {}", form);
         return ResponseEntity.status(HttpStatus.OK).body(userService.addFavorites(form));
     }
+
+
 }

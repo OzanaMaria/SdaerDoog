@@ -20,6 +20,12 @@ public class Book {
     private int id;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "author", nullable = false)
+    private String author;
+    @Column(name = "photo", nullable = false)
+    private String photo;
+    @Column(name = "genre", nullable = false)
+    private String genre;
 
     @OneToMany(mappedBy = "book")
     Set<UserBook> ratings;

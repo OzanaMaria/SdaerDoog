@@ -1,5 +1,3 @@
-
-
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
@@ -10,14 +8,17 @@ import Image from 'react-bootstrap/Image';
 import Select from 'react-select';
 import backgroundImg from "./../Assets/Images/image.jpg";
 import "../Auth/SignUp.css";
+import axios from 'axios';
 export default function Login() {
     const [books, setBooks] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/dashboard')
-            .then((res) => res.json())
-            .then((result) => {
-                setBooks(result);
-            });
+        axios.get("http://localhost:8888/books")
+                        .then(res => {
+                           setBooks(res.data)
+                        })
+                        .catch(() => {
+                               console.log("Error retrieving data!");
+                        });
     }, []);
     const [error, setError] = useState("");
     const authors = books.map(function (book) {
@@ -25,17 +26,22 @@ export default function Login() {
     });
 
     const booksRecommend = books.map(function (book) {
-        return { value: book.title, label: book.title }
+        return { value: book.name, label: book.name }
     });
 
     const booksRead = books.map(function (book) {
-        return { value: book.title, label: book.title }
+        return { value: book.name, label: book.name }
     });
     const genre = books.map(function (book) {
         return book.genre
     });
     const removeDuplicatesGenre = [...new Set(genre)];
-    const removeDuplicatesAuthors = [...new Set(authors)];
+
+    function getUniqueListBy(arr, key) {
+        return [...new Map(arr.map(item => [item[key], item])).values()]
+    }
+
+    const removeDuplicatesAuthors = getUniqueListBy(authors, 'value')
     const navigate = useNavigate();
     const [input, setInput] = useState({
         author: '',
@@ -71,11 +77,12 @@ export default function Login() {
             booksRecommend: input.booksRecommend,
             booksRead: input.booksRead,
         }
-        console.log(newInput)
+        console.log(newInput.genre)
         navigate(
-            "/dashboard", { state: newInput }
+            "/dashboard/" + newInput.genre, { state: newInput }
         )
     }
+
     return (
         <Container>
             <Row className='first-display-card'>

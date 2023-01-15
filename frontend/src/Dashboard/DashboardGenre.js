@@ -4,19 +4,23 @@ import ListCard from "./Card";
 import { useLocation } from "react-router-dom";
 import "./Dashboard.css";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Dashboard() {
     const location = useLocation();
     const [books, setBooks] = useState([]);
+    const params = useParams();
+
+    console.log(params.genre)
 
     useEffect(() => {
-           axios.get("http://localhost:8888/books")
-                .then(res => {
-                   setBooks(res.data)
-                })
-                .catch(() => {
-                       console.log("Error retrieving data!");
-                });
+           axios.get("http://localhost:8888/books/genre?genre=" + params.genre)
+                                           .then(res => {
+                                              setBooks(res.data)
+                                           })
+                                           .catch(() => {
+                                                  console.log("Error retrieving data!");
+                                           });
     }, []);
     const displayCard = () => {
         {

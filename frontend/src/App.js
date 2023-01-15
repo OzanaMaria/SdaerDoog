@@ -8,6 +8,7 @@ import Home from "./Home/Home";
 import FirstLoginForm from "./Dashboard/FirstForm";
 import Dashboard from "./Dashboard/Dashboard";
 import ListingPage from "./Dashboard/ListingPage";
+import DashboardGenre from "./Dashboard/DashboardGenre";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/registerForm" element={<FirstLoginForm />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/listingPage/:id" element={<ListingPage />} />
+          <Route exact path="/dashboard/:genre" element={<DashboardGenre />} />
         </Routes>
       </AuthProvider>
     </Router>

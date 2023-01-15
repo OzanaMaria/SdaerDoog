@@ -5,28 +5,27 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { SlLike } from "react-icons/sl"
 import { SlDislike } from "react-icons/sl"
+import axios from 'axios';
 export default function ListingPage() {
     const params = useParams();
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/dashboard')
-            .then((res) => res.json())
-            .then((result) => {
-                setBooks(result);
-            });
+        axios.get("http://localhost:8888/book?id=" + parseInt(params.id))
+                        .then(res => {
+                           setBooks(res.data)
+                        })
+                        .catch(() => {
+                               console.log("Error retrieving data!");
+                        });
     }, []);
-    const booksRecommend = books.filter((book) =>
-        book.id === parseInt(params.id)
-    );
 
-    console.log(booksRecommend.length > 0);
+    console.log(parseInt(params.id))
 
     return (
         <Col>
             <Row>
-                {booksRecommend.length > 0 &&
-                    <LazyLoadImage className="card-photo" src={booksRecommend[0].photo}
+                {<LazyLoadImage className="card-photo" src={books.photo}
                         width={350} height={450}
                         alt="Image Alt"
                         effect="blur"
