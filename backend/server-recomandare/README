@@ -1,0 +1,6 @@
+Pornire server:
+
+python3 recomandare.py
+
+chemare api postman:
+http://localhost:5000/recommendations?book=<nume-carte>
